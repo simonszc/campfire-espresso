@@ -49,6 +49,15 @@ var pike = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
 };
 var capHill = {
@@ -101,6 +110,15 @@ var capHill = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
 };
 var seaPubLib = {
@@ -153,6 +171,15 @@ var seaPubLib = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
 };
 var southLakeUnion = {
@@ -205,8 +232,17 @@ var southLakeUnion = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
-  };
+};
 var seaTacAirport = {
   locationName: 'Sea-Tac Airport',
   minHourlyTraffic: 68,
@@ -257,6 +293,15 @@ var seaTacAirport = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
 };
 var websiteSales = {
@@ -309,5 +354,21 @@ var websiteSales = {
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     };
+  },
+  calculateAndRender: function () {
+    this.calculateHourlyTraffic();
+    this.calculateHourlyCupsInCups();
+    this.populateHourlyCupsInPounds();
+    this.calculateHourlyToGoInPounds();
+    this.calculateHourlyPoundsSoldTotal();
+    this.renderLocation();
+    this.renderData();
   }
 };
+
+pike.calculateAndRender();
+capHill.calculateAndRender();
+seaPubLib.calculateAndRender();
+southLakeUnion.calculateAndRender();
+seaTacAirport.calculateAndRender();
+websiteSales.calculateAndRender();
