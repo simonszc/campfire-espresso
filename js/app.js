@@ -14,22 +14,22 @@ var pike = {
   calculateHourlyTraffic: function() {
    for (var i = 0; i < this.hoursOpen.length; i++) {
      this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
-    }
+   }
   },
   calculateHourlyCups: function() {
     for(var i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
+      this.hourlyCupsInCups.push(this.hourlyTraffic[i] * this.cupsPerCust);
+      this.hourlyCupsInPounds.push(this.hourlyTraffic[i] * this.cupsPerCust * 0.05);
     }
   },
   calculateHourlyToGoInPounds: function() {
     for (var i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
+      this.hourlyToGoInPounds.push(this.hourlyTraffic[i] * this.poundsPerCust);
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
     for (var i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
+      this.hourlyPoundsSoldTotal.push(this.hourlyTraffic[i] * this.cupsPerCust * 0.05 + this.hourlyTraffic[i] * this.poundsPerCust);
     }
   },
   renderLocation: function() {
@@ -40,9 +40,9 @@ var pike = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
-      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
+      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i].toFixed(1) + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i].toFixed(1) + ' cups (' + this.hourlyCupsInPounds[i].toFixed(1) + ' lbs), ' + this.hourlyToGoInPounds[i].toFixed(1) + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     }
   },
@@ -96,7 +96,7 @@ var capHill = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -152,7 +152,7 @@ var seaPubLib = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -208,7 +208,7 @@ var southLakeUnion = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -264,7 +264,7 @@ var seaTacAirport = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -320,7 +320,7 @@ var websiteSales = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
