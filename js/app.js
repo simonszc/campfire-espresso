@@ -34,10 +34,6 @@ function Kiosk (locName, minTraffic, maxTraffic, cupsPer, poundsPer) {
       this.hourlyPoundsSoldTotal.push(totalPoundsSold.toFixed(1));
     }
   };
-  this.populateAll = function() {
-    this.calculateHourlyTraffic();
-    this.calculateHourlySales();
-  };
 };
 
 var pike = new Kiosk('Pike Place Market', 14, 55, 1.2, 3.7);
@@ -49,7 +45,8 @@ var websiteSales = new Kiosk('Website Sales', 3, 6, 0, 6.7);
 var allKiosks = [pike, capHill, seaPubLib, southLakeUnion, seaTacAirport, websiteSales];
 var hoursOpen = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 for (var i = 0; i < allKiosks.length; i++) {
-  allKiosks[i].populateAll();
+  allKiosks[i].calculateHourlyTraffic();
+  allKiosks[i].calculateHourlySales();
 }
 
 displayTable = function() {
