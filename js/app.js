@@ -7,6 +7,8 @@ var pike = {
   poundsPerCust: 3.7,
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
   hourlyTraffic: [],
+  totalTrafficCounter: 0,
+  totalTraffic: [],
   hourlyCupsInCups: [],
   hourlyCupsInPounds: [],
   hourlyToGoInPounds: [],
@@ -14,6 +16,8 @@ var pike = {
   calculateHourlyTraffic: function() {
    for (var i = 0; i < this.hoursOpen.length; i++) {
      this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
+     this.totalTrafficCounter += this.hourlyTraffic[i];
+     this.totalTraffic.push(this.totalTrafficCounter);
    }
   },
   calculateHourlyCups: function() {
@@ -50,7 +54,7 @@ var pike = {
     document.body.appendChild(listContainer);
     for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
-      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i].toFixed(1) + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i].toFixed(1) + ' cups (' + this.hourlyCupsInPounds[i].toFixed(1) + ' lbs), ' + this.hourlyToGoInPounds[i].toFixed(1) + ' lbs to-go]';
+      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i].toFixed(1) + ' lbs [' + this.totalTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i].toFixed(1) + ' cups (' + this.hourlyCupsInPounds[i].toFixed(1) + ' lbs), ' + this.hourlyToGoInPounds[i].toFixed(1) + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     }
   },
