@@ -17,19 +17,27 @@ var pike = {
    }
   },
   calculateHourlyCups: function() {
+    var totalCupsInCups = 0;
+    var totalCupsInPounds = 0;
     for(var i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInCups.push(this.hourlyTraffic[i] * this.cupsPerCust);
-      this.hourlyCupsInPounds.push(this.hourlyTraffic[i] * this.cupsPerCust * 0.05);
+      totalCupsInCups += this.hourlyTraffic[i] * this.cupsPerCust;
+      this.hourlyCupsInCups.push(totalCupsInCups);
+      totalCupsInPounds += this.hourlyTraffic[i] * this.cupsPerCust * 0.05;
+      this.hourlyCupsInPounds.push(totalCupsInPounds);
     }
   },
   calculateHourlyToGoInPounds: function() {
+    var totalToGoInPounds = 0;
     for (var i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyToGoInPounds.push(this.hourlyTraffic[i] * this.poundsPerCust);
+      totalToGoInPounds += this.hourlyTraffic[i] * this.poundsPerCust;
+      this.hourlyToGoInPounds.push(totalToGoInPounds);
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
+    var totalPoundsSold = 0;
     for (var i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(this.hourlyTraffic[i] * this.cupsPerCust * 0.05 + this.hourlyTraffic[i] * this.poundsPerCust);
+      totalPoundsSold += this.hourlyTraffic[i] * this.cupsPerCust * 0.05 + this.hourlyTraffic[i] * this.poundsPerCust;
+      this.hourlyPoundsSoldTotal.push(totalPoundsSold);
     }
   },
   renderLocation: function() {
