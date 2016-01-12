@@ -1,4 +1,3 @@
-//my js will be in here
 var pike = {
   locationName: 'Pike Place Market',
   minHourlyTraffic: 14,
