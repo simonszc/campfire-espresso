@@ -7,33 +7,41 @@ var pike = {
   poundsPerCust: 3.7,
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
   hourlyTraffic: [],
+  totalTrafficCounter: 0,
+  totalTraffic: [],
   hourlyCupsInCups: [],
   hourlyCupsInPounds: [],
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
-    }
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
+     this.totalTrafficCounter += this.hourlyTraffic[i];
+     this.totalTraffic.push(this.totalTrafficCounter);
+   }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+  calculateHourlyCups: function() {
+    var totalCupsInCups = 0;
+    var totalCupsInPounds = 0;
+    for(var i = 0; i < this.hoursOpen.length; i++){
+      totalCupsInCups += this.hourlyTraffic[i] * this.cupsPerCust;
+      this.hourlyCupsInCups.push(totalCupsInCups);
+      totalCupsInPounds += this.hourlyTraffic[i] * this.cupsPerCust * 0.05;
+      this.hourlyCupsInPounds.push(totalCupsInPounds);
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
+    var totalToGoInPounds = 0;
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      totalToGoInPounds += this.hourlyTraffic[i] * this.poundsPerCust;
+      this.hourlyToGoInPounds.push(totalToGoInPounds);
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    var totalPoundsSold = 0;
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      totalPoundsSold += this.hourlyTraffic[i] * this.cupsPerCust * 0.05 + this.hourlyTraffic[i] * this.poundsPerCust;
+      this.hourlyPoundsSoldTotal.push(totalPoundsSold);
     }
   },
   renderLocation: function() {
@@ -44,16 +52,15 @@ var pike = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
-      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
+      dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i].toFixed(1) + ' lbs [' + this.totalTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i].toFixed(1) + ' cups (' + this.hourlyCupsInPounds[i].toFixed(1) + ' lbs), ' + this.hourlyToGoInPounds[i].toFixed(1) + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
     }
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
@@ -73,28 +80,24 @@ var capHill = {
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
+  calculateHourlyCups: function() {
+    for(var i = 0; i < this.hoursOpen.length; i++){
       this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
     }
   },
   renderLocation: function() {
@@ -105,7 +108,7 @@ var capHill = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -113,8 +116,7 @@ var capHill = {
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
@@ -134,28 +136,24 @@ var seaPubLib = {
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
+  calculateHourlyCups: function() {
+    for(var i = 0; i < this.hoursOpen.length; i++){
       this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
     }
   },
   renderLocation: function() {
@@ -166,7 +164,7 @@ var seaPubLib = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -174,8 +172,7 @@ var seaPubLib = {
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
@@ -195,28 +192,24 @@ var southLakeUnion = {
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
+  calculateHourlyCups: function() {
+    for(var i = 0; i < this.hoursOpen.length; i++){
       this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
     }
   },
   renderLocation: function() {
@@ -227,7 +220,7 @@ var southLakeUnion = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -235,8 +228,7 @@ var southLakeUnion = {
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
@@ -256,28 +248,24 @@ var seaTacAirport = {
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
+  calculateHourlyCups: function() {
+    for(var i = 0; i < this.hoursOpen.length; i++){
       this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
     }
   },
   renderLocation: function() {
@@ -288,7 +276,7 @@ var seaTacAirport = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -296,8 +284,7 @@ var seaTacAirport = {
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
@@ -317,28 +304,24 @@ var websiteSales = {
   hourlyToGoInPounds: [],
   hourlyPoundsSoldTotal: [],
   calculateHourlyTraffic: function() {
-   for (i = 0; i < this.hoursOpen.length; i++) {
-     this.hourlyTraffic.push(Math.floor(this.minHourlyTraffic + Math.random()*(this.maxHourlyTraffic - this.minHourlyTraffic)));
+   for (var i = 0; i < this.hoursOpen.length; i++) {
+     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     }
   },
-  calculateHourlyCupsInCups: function() {
-    for(i = 0; i < this.hoursOpen.length; i++){
+  calculateHourlyCups: function() {
+    for(var i = 0; i < this.hoursOpen.length; i++){
       this.hourlyCupsInCups.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust));
-    }
-  },
-  populateHourlyCupsInPounds: function () {
-    for(i = 0; i < this.hoursOpen.length; i++){
-      this.hourlyCupsInPounds.push(Math.round(this.hourlyCupsInCups[i] * 0.05));
+      this.hourlyCupsInPounds.push(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05));
     }
   },
   calculateHourlyToGoInPounds: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       this.hourlyToGoInPounds.push(Math.round(this.hourlyTraffic[i] * this.poundsPerCust));
     }
   },
   calculateHourlyPoundsSoldTotal: function() {
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      this.hourlyPoundsSoldTotal.push(Math.round(this.hourlyCupsInPounds[i] + this.hourlyToGoInPounds[i]));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.hourlyPoundsSoldTotal.push(Math.round(Math.round(this.hourlyTraffic[i] * this.cupsPerCust * 0.05) + Math.round(this.hourlyTraffic[i] * this.poundsPerCust)));
     }
   },
   renderLocation: function() {
@@ -349,7 +332,7 @@ var websiteSales = {
   renderData: function () {
     var listContainer = document.createElement('ul');
     document.body.appendChild(listContainer);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       var dataOutput = document.createElement('li');
       dataOutput.textContent = this.hoursOpen[i] + ': ' + this.hourlyPoundsSoldTotal[i] + ' lbs [' + this.hourlyTraffic[i] + '  customers, ' + this.hourlyCupsInCups[i] + ' cups (' + this.hourlyCupsInPounds[i] + ' lbs), ' + this.hourlyToGoInPounds[i] + ' lbs to-go]';
       listContainer.appendChild(dataOutput);
@@ -357,8 +340,7 @@ var websiteSales = {
   },
   calculateAndRender: function () {
     this.calculateHourlyTraffic();
-    this.calculateHourlyCupsInCups();
-    this.populateHourlyCupsInPounds();
+    this.calculateHourlyCups();
     this.calculateHourlyToGoInPounds();
     this.calculateHourlyPoundsSoldTotal();
     this.renderLocation();
