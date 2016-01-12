@@ -1,4 +1,4 @@
-//my js will be in here
+//Pike will become my constructor
 var pike = {
   locationName: 'Pike Place Market',
   minHourlyTraffic: 14,
@@ -26,7 +26,7 @@ var pike = {
     for(var i = 0; i < this.hoursOpen.length; i++){
       totalCupsInCups += this.hourlyTraffic[i] * this.cupsPerCust;
       this.hourlyCupsInCups.push(totalCupsInCups);
-      totalCupsInPounds += this.hourlyTraffic[i] * this.cupsPerCust * 0.05;
+      totalCupsInPounds = this.hourlyCupsInCups[i] * 0.05;
       this.hourlyCupsInPounds.push(totalCupsInPounds);
     }
   },
