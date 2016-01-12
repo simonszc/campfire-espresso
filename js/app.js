@@ -1,3 +1,4 @@
+//Pike will become my constructor
 var pike = {
   locationName: 'Pike Place Market',
   minHourlyTraffic: 14,
