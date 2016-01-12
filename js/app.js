@@ -17,7 +17,7 @@ function Kiosk (locName, minTraffic, maxTraffic, cupsPer, poundsPer) {
      this.totalTrafficCounter += this.hourlyTraffic[i];
      this.totalTraffic.push(this.totalTrafficCounter);
    }
- };
+  };
   this.calculateHourlySales = function() {
     var totalCupsInCups = 0;
     var totalCupsInPounds = 0;
@@ -63,7 +63,7 @@ displayTable = function() {
       }
     tableEl.appendChild(firstRow);
     //rest of rows
-  for (var hour = 0; hour < hoursOpen.length; hour++) {
+    for (var hour = 0; hour < hoursOpen.length; hour++) {
       var newRow = document.createElement('tr');
       var displayHour = document.createElement('th');
       displayHour.textContent = hoursOpen[hour];
