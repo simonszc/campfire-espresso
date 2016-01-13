@@ -49,7 +49,7 @@ for (var i = 0; i < allKiosks.length; i++) {
   allKiosks[i].calculateHourlySales();
 }
 
-displayTable = function() {
+Kiosk.prototype.displayTable = function() {
   var tableEl = document.createElement('table');
   //first row is special
     var firstRow = document.createElement('tr');
@@ -78,4 +78,4 @@ displayTable = function() {
   document.getElementById('tableDisplay').appendChild(tableEl);
 };
 
-displayTable();
+websiteSales.displayTable();
