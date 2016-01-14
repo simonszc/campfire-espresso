@@ -11,10 +11,10 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
-h1.headertitle {
+.headertitle {
   font-weight: bold;
 }
-h3.headerslogan {
+.headerslogan {
   font-style: italic;
 }
 .headerimgleft {
@@ -35,17 +35,24 @@ h3.headerslogan {
 }
 .mainnav li {
   display: inline;
-  width: 150px;
-  padding: 10px 84px 10px 60px;
+  width: 230px;
+  padding: 10px 60px 10px 60px;
+  margin: 10px 10px 10px 10px;
+  border-width: thin;
+  border-color: red;
+  border-style: solid;
+  background-color: blue;
 }
 .merchandisepics a {
   height: 400px;
-  width: 475px;
+  width: 455px;
   position: relative;
+  margin: 10px;
+  padding: 10px;
 }
 .merchandisepics a img {
   height: 400px;
-  width: 475px;
+  width: 455px;
 }
 .merchandisepics p {
   position: absolute;
@@ -58,14 +65,27 @@ h3.headerslogan {
   font-weight: bold;
   font-size: 200%;
 }
+.mainbody {
+  display: inline-block;
+  width: 960px;
+}
 .locationsdisplay {
   display: inline;
   width: 200px;
+  float: left;
+  background-color: green;
+}
+.location li {
+  width: 300px;
 }
 .mainarticle {
   display: inline;
+  background-color: yellow;
+  width: 400px;
 }
 .campinginfo {
   display: inline;
   width: 200px;
+  float: right;
+  background-color: red;
 }
