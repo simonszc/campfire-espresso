@@ -37,7 +37,21 @@ header {
   width: 20%;
   margin: 3em 5em;
 }
-
+.merchandisepics a {
+  width: 28em;
+  position: relative;
+  text-align: center;
+}
+.merchandisepics img {
+  width: 100%;
+}
+.merchandisepics p {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  margin-bottom: 0em;
+  background-color: red;
+}
 /*
 .merchandisepics a {
   height: 400px;
