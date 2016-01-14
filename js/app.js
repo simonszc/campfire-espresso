@@ -14,6 +14,9 @@ function Kiosk (locName, minTraffic, maxTraffic, cupsPer, poundsPer) {
   this.soldPoundsTotal = [];
 };
 Kiosk.prototype.calculateHourlyTraffic = function() {
+  this.hourlyTraffic = [];
+  this.totalTrafficCounter = 0;
+  this.totalTraffic = [];
   for (var i = 0; i < hoursOpen.length; i++) {
     this.hourlyTraffic.push(Math.floor(Math.random() * (this.maxHourlyTraffic - this.minHourlyTraffic + 1)) + this.minHourlyTraffic);
     this.totalTrafficCounter += this.hourlyTraffic[i];
@@ -21,6 +24,11 @@ Kiosk.prototype.calculateHourlyTraffic = function() {
   }
 };
 Kiosk.prototype.calculateHourlySales = function (){
+  this.soldCupsInCups = [];
+  this.hourlyCupsInCups = [];
+  this.soldCupsInPounds = [];
+  this.soldToGoInPounds = [];
+  this.soldPoundsTotal = [];
   var totalCupsInCups = 0;
   var totalCupsInPounds = 0;
   var totalToGoInPounds = 0;
@@ -51,7 +59,34 @@ for (var i = 0; i < allKiosks.length; i++) {
   allKiosks[i].calculateHourlySales();
 }
 
+var newStoreForm = document.getElementById('new-store-form');
+
+function handleStoreSubmit(event) {
+  console.log(event);
+  event.preventDefault();
+
+  var newKioskLocation = event.target.where.value;
+  var newKioskMin = parseInt(event.target.min.value);
+  var newKioskMax = parseInt(event.target.max.value);
+  var newKioskCups = parseInt(event.target.cups.value);
+  var newKioskPounds = parseInt(event.target.pounds.value);
+
+  var newKiosk = new Kiosk(newKioskLocation, newKioskMin, newKioskMax, newKioskCups, newKioskPounds);
+  allKiosks.push(newKiosk);
+
+  for (var i = 0; i < allKiosks.length; i++) {
+    allKiosks[i].calculateHourlyTraffic();
+    allKiosks[i].calculateHourlySales();
+  }
+  newKiosk.displayPoundsTable();
+  newKiosk.displayCupsTable();
+  newKiosk.displayTrafficTable();
+};
+
+newStoreForm.addEventListener('submit', handleStoreSubmit);
+
 Kiosk.prototype.displayPoundsTable = function() {
+    document.getElementById('poundsDisplay').textContent = '';
   var tableEl = document.createElement('table');
   //first row is special
     var firstRow = document.createElement('tr');
@@ -83,6 +118,7 @@ Kiosk.prototype.displayPoundsTable = function() {
 websiteSales.displayPoundsTable();
 
 Kiosk.prototype.displayCupsTable = function() {
+  document.getElementById('cupsDisplay').textContent = '';
   var tableEl = document.createElement('table');
   //first row is special
     var firstRow = document.createElement('tr');
@@ -114,6 +150,7 @@ Kiosk.prototype.displayCupsTable = function() {
 websiteSales.displayCupsTable();
 
 Kiosk.prototype.displayTrafficTable = function() {
+    document.getElementById('trafficDisplay').textContent = '';
   var tableEl = document.createElement('table');
   //first row is special
     var firstRow = document.createElement('tr');
