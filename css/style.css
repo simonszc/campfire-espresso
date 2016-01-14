@@ -1,14 +1,13 @@
 /*my css will be in here */
 body {
-  width: 960px;
+  width: 60em;
   margin: auto;
   text-align: center;
 }
 header {
-  text-align: center;
   font-family: Georgia, serif;
   position: relative;
-  height: 100px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -19,31 +18,27 @@ header {
   font-style: italic;
 }
 .headerimgleft {
-  height: 90px;
+  width: 22%;
   position: absolute;
   top: 0px;
   left: 0px;
 }
 .headerimgright {
-  height: 90px;
+  width: 22%;
   position: absolute;
   top: 0px;
   right: 0px;
 }
 .mainnav {
-  width: 960px;
-  margin: 10px auto 10px auto
+  width: 100%;
 }
 .mainnav li {
   display: inline;
-  width: 230px;
-  padding: 10px 60px 10px 60px;
-  margin: 10px 10px 10px 10px;
-  border-width: thin;
-  border-color: red;
-  border-style: solid;
-  background-color: blue;
+  width: 20%;
+  margin: 3em 5em;
 }
+
+/*
 .merchandisepics a {
   height: 400px;
   width: 455px;
@@ -89,4 +84,4 @@ header {
   width: 200px;
   float: right;
   background-color: red;
-}
+}*/
