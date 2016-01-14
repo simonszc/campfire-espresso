@@ -1,1 +1,91 @@
 /*my css will be in here */
+body {
+  width: 960px;
+  margin: auto;
+}
+header {
+  text-align: center;
+  font-family: Georgia, serif;
+  position: relative;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.headertitle {
+  font-weight: bold;
+}
+.headerslogan {
+  font-style: italic;
+}
+.headerimgleft {
+  height: 90px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.headerimgright {
+  height: 90px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.mainnav {
+  width: 960px;
+  margin: 10px auto 10px auto
+}
+.mainnav li {
+  display: inline;
+  width: 230px;
+  padding: 10px 60px 10px 60px;
+  margin: 10px 10px 10px 10px;
+  border-width: thin;
+  border-color: red;
+  border-style: solid;
+  background-color: blue;
+}
+.merchandisepics a {
+  height: 400px;
+  width: 455px;
+  position: relative;
+  margin: 10px;
+  padding: 10px;
+}
+.merchandisepics a img {
+  height: 400px;
+  width: 455px;
+}
+.merchandisepics p {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 5px;
+  left: 120px;
+  z-index: 2;
+  color: white;
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 200%;
+}
+.mainbody {
+  display: inline-block;
+  width: 960px;
+}
+.locationsdisplay {
+  display: inline;
+  width: 200px;
+  float: left;
+  background-color: green;
+}
+.location li {
+  width: 300px;
+}
+.mainarticle {
+  display: inline;
+  background-color: yellow;
+  width: 400px;
+}
+.campinginfo {
+  display: inline;
+  width: 200px;
+  float: right;
+  background-color: red;
+}
