@@ -4,14 +4,6 @@ function Kiosk (locName, minTraffic, maxTraffic, cupsPer, poundsPer) {
   this.maxHourlyTraffic = maxTraffic;
   this.cupsPerCust = cupsPer;
   this.poundsPerCust = poundsPer;
-  this.hourlyTraffic = [];
-  this.totalTrafficCounter = 0;
-  this.totalTraffic = [];
-  this.soldCupsInCups = [];
-  this.hourlyCupsInCups = [];
-  this.soldCupsInPounds = [];
-  this.soldToGoInPounds = [];
-  this.soldPoundsTotal = [];
 };
 Kiosk.prototype.calculateHourlyTraffic = function() {
   this.hourlyTraffic = [];
