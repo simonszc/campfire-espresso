@@ -20,14 +20,14 @@ header {
 .headerimgleft {
   width: 22%;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0em;
+  left: 0em;
 }
 .headerimgright {
   width: 22%;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0em;
+  right: 0em;
 }
 .mainnav {
   width: 100%;
@@ -37,51 +37,43 @@ header {
   width: 20%;
   margin: 3em 5em;
 }
-
-/*
 .merchandisepics a {
-  height: 400px;
-  width: 455px;
+  width: 28em;
   position: relative;
-  margin: 10px;
-  padding: 10px;
+  text-align: center;
 }
-.merchandisepics a img {
-  height: 400px;
-  width: 455px;
+.merchandisepics img {
+  width: 100%;
 }
 .merchandisepics p {
   position: absolute;
   bottom: 0px;
-  margin-bottom: 5px;
-  left: 120px;
-  z-index: 2;
-  color: white;
-  font-family: Georgia, serif;
-  font-weight: bold;
-  font-size: 200%;
+  width: 100%;
+  margin-bottom: 0em;
+  background-color: red;
 }
 .mainbody {
-  display: inline-block;
-  width: 960px;
+  width:100%;
 }
-.locationsdisplay {
-  display: inline;
-  width: 200px;
-  float: left;
-  background-color: green;
-}
-.location li {
-  width: 300px;
+.mainbody section {
+  margin-top: 2em;
 }
 .mainarticle {
-  display: inline;
-  background-color: yellow;
-  width: 400px;
+  margin-top: 2em;
 }
 .campinginfo {
-  display: inline;
-  width: 200px;
-  float: right;
-  background-color: red;
-}*/
+  margin-top: 2em;
+}
+.familypic {
+  width: 10em;
+  float: left;
+}
+body > section > section.locationsdisplay\2c.three.columns {
+  margin-top: 2em;
+}
+body > section > article {
+  margin-top: 2em;
+}
+body > section > section.campinginfo\2c.three.columns {
+  margin-top: 2em;
+}
