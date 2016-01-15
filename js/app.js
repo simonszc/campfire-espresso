@@ -71,16 +71,26 @@ function handleStoreSubmit(event) {
   var newKioskCups = parseInt(event.target.cups.value);
   var newKioskPounds = parseInt(event.target.pounds.value);
 
-  var newKiosk = new Kiosk(newKioskLocation, newKioskMin, newKioskMax, newKioskCups, newKioskPounds);
-  allKiosks.push(newKiosk);
-
-  for (var i = 0; i < allKiosks.length; i++) {
-    allKiosks[i].calculateHourlyTraffic();
-    allKiosks[i].calculateHourlySales();
+  if (!event.target.where.value || !event.target.min.value ||!event.target.max.value || !event.target.cups.value ||!event.target.pounds.value) {
+    return alert('You left a field empty!')
   }
-  newKiosk.displayPoundsTable();
-  newKiosk.displayCupsTable();
-  newKiosk.displayTrafficTable();
+  else {
+    var newKiosk = new Kiosk(newKioskLocation, newKioskMin, newKioskMax, newKioskCups, newKioskPounds);
+    allKiosks.push(newKiosk);
+
+    for (var i = 0; i < allKiosks.length; i++) {
+      allKiosks[i].calculateHourlyTraffic();
+      allKiosks[i].calculateHourlySales();
+    }
+    event.target.where.value = null;
+    event.target.min.value = null;
+    event.target.max.value = null;
+    event.target.cups.value = null;
+    event.target.pounds.value = null;
+    newKiosk.displayPoundsTable();
+    newKiosk.displayCupsTable();
+    newKiosk.displayTrafficTable();
+  }
 };
 
 newStoreForm.addEventListener('submit', handleStoreSubmit);
