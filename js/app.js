@@ -82,6 +82,11 @@ function handleStoreSubmit(event) {
       allKiosks[i].calculateHourlyTraffic();
       allKiosks[i].calculateHourlySales();
     }
+    event.target.where.value = null;
+    event.target.min.value = null;
+    event.target.max.value = null;
+    event.target.cups.value = null;
+    event.target.pounds.value = null;
     newKiosk.displayPoundsTable();
     newKiosk.displayCupsTable();
     newKiosk.displayTrafficTable();
