@@ -81,6 +81,9 @@ body > article > a:nth-child(2) {
 .mainbody {
   width:100%;
 }
+body > section > article {
+  margin-top: 2em;
+}
 .familypic {
   width: 10em;
   float: left;
